@@ -1,0 +1,18 @@
+# Node/Front
+node_modules/
+dist/
+build/
+.env
+
+# Java/Backend
+target/
+*.log
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# SO
+.DS_Store
+Thumbs.db
