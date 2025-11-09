@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Planner - Kanban</title>
+    <link rel="stylesheet" href="../css/kanban.css">
+</head>
+<body>
+    <div class="kanban-container">
+
+        <!-- Header -->
+        <header>
+            <h1>Dev Planner</h1>
+            <div class="header-buttons">
+                <button class="btn" onclick="openModal()">Nova Tarefa</button>
+                <button class="btn" onclick="openHistoryModal()">Histórico</button>
+            </div>
+        </header>
+
+        <!-- Kanban Board -->
+        <div class="kanban-board">
+            <div class="kanban-column" id="todo" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <h3>A Fazer</h3>
+            </div>
+            <div class="kanban-column" id="doing" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <h3>Fazendo</h3>
+            </div>
+            <div class="kanban-column" id="review" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <h3>Review</h3>
+            </div>
+            <div class="kanban-column" id="done" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <h3>Feito</h3>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Nova Tarefa -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Nova Tarefa</h2>
+            <input type="text" id="task-title" placeholder="Título da tarefa">
+            <textarea id="task-desc" placeholder="Descrição da tarefa"></textarea>
+            <input type="date" id="task-date">
+            <select id="task-priority">
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+            </select>
+            <select id="task-type">
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="Reunião">Reunião</option>
+                <option value="Pesquisa">Pesquisa</option>
+            </select>
+
+            <!-- selects populados automaticamente pelo kanban.js -->
+            <select id="task-project" aria-label="Projeto"></select>
+            <select id="task-owner" aria-label="Responsável"></select>
+
+            <div class="modal-buttons">
+                <button class="btn" onclick="addTask()">Adicionar</button>
+                <button class="btn" id="finish-task-btn" onclick="finishTask()">Finalizar</button>
+                <button class="btn" id="delete-task-btn" onclick="deleteTask()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Histórico -->
+    <div id="history-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeHistoryModal()">&times;</span>
+            <h2>Histórico de Tarefas Finalizadas</h2>
+            <div id="history-tasks"></div>
+        </div>
+    </div>
+
+    <script src="../script/kanban.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6C63FF, #4b45a1);
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Container */
+.kanban-container {
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+header .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #6C63FF;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+header .btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Kanban Board */
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kanban-column {
+    background-color: #f4f4f4;
+    border-radius: 12px;
+    flex: 1 1 22%;
+    min-height: 500px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.kanban-column h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: 600;
+}
+
+/* ============================ */
+/* Task Card                    */
+/* ============================ */
+
+.task-card {
+    background: #fff;
+    color: #222;
+    border-left: 5px solid #6C63FF;
+    border-radius: 10px;
+    padding: 12px 12px 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: grab;
+}
+
+.task-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+/* título, badges e descrição */
+.task-title {
+    font-weight: 700;
+    font-size: .98rem;
+    margin-bottom: 6px;
+    color: #2b2b2b;
+}
+
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: .75rem;
+    line-height: 1;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: #eef1ff;
+    color: #4b45a1;
+    border: 1px solid rgba(75,69,161,.15);
+}
+
+/* dificuldade */
+.badge--dif.baixa  { background: #e7f7ec; color: #2f8a44; border-color: rgba(79,185,111,.2); }
+.badge--dif.media  { background: #fff3e2; color: #b46900; border-color: rgba(255,152,0,.25); }
+.badge--dif.alta   { background: #fee7e7; color: #b3261e; border-color: rgba(244,67,54,.25); }
+
+/* tipo */
+.badge--tipo { background: #eef6ff; color: #255faa; border-color: rgba(37,95,170,.18); }
+
+/* descrição */
+.task-desc {
+    font-size: .9rem;
+    color: #4a4a4a;
+    line-height: 1.35;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* cores de prioridade (mantidas) */
+.task-card[data-priority="Baixa"] { border-left-color: #4caf50; }
+.task-card[data-priority="Média"] { border-left-color: #ff9800; }
+.task-card[data-priority="Alta"]  { border-left-color: #f44336; }
+
+/* ============================ */
+/* Modal - Base                 */
+/* ============================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(2px);
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.modal.is-open {
+    display: flex;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: min(520px, 92vw);
+    max-height: min(85vh, 900px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #333;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    overflow: auto;
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #6C63FF;
+}
+
+.modal-content input, 
+.modal-content textarea, 
+.modal-content select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    width: 100%;
+}
+
+.modal-content button.btn {
+    background-color: #6C63FF;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.modal-content button.btn:hover {
+    background-color: #5848c2;
+}
+
+.close {
+    align-self: flex-end;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+/* ============================ */
+/* FIX ROBUSTO DE CENTRALIZAÇÃO */
+/* ============================ */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,.6);
+    backdrop-filter: blur(2px);
+    padding: 0;
+    display: none;
+}
+
+.modal.is-open {
+    display: block;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
+    width: min(520px, 92vw);
+    max-height: min(85vh, 900px);
+    overflow: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,.25);
+    padding: 25px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
